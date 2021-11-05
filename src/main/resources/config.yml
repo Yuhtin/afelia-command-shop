@@ -1,0 +1,58 @@
+success: "&aYou spent @coins to buy this command."
+noCoins: "&cYou don't have coins to buy this command."
+permissionCommand: 'lp user @player permission set @perm'
+
+inventoryName: '&8Command shop'
+itemLore:
+  - '&8Click to buy this command'
+  - ''
+  - '&7Price: &a@price'
+
+commands:
+  command1:
+    name: '&cFly permission'
+    material: FEATHER
+    price: 1000
+    permission: 'essentials.fly'
+  command2:
+    name: '&aGamemode permission'
+    material: EYE_OF_ENDER
+    price: 150000
+    permission: 'essentials.gamemode'
+
+# Options of number formatters: 'DECIMAL' e 'LETTER'
+format-type: 'LETTER' # letter = 1K, 1M etc... | decimal = 1.000,00, 1.000.000,00 etc...
+# Create formatters
+currency-format:
+  - ''
+  - 'k'
+  - 'M'
+  - 'B'
+  - 'T'
+  - 'Q'
+  - 'QQ'
+  - 'S'
+  - 'SS'
+  - 'OC'
+  - 'N'
+  - 'D'
+  - 'UN'
+  - 'DD'
+  - 'TR'
+  - 'QT'
+  - 'QN'
+  - 'SD'
+  - 'SPD'
+  - 'OD'
+  - 'ND'
+  - 'VG'
+  - 'UVG'
+  - 'DVG'
+  - 'TVG'
+  - 'QTV'
+  - 'QNV'
+  - 'SEV'
+  - 'SPV'
+  - 'OVG'
+  - 'NVG'
+  - 'TG'
