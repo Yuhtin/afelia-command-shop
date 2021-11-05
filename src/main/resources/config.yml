@@ -16,7 +16,7 @@ commands:
     permission: 'essentials.fly'
   command2:
     name: '&aGamemode permission'
-    material: EYE_OF_ENDER
+    material: ENDER_EYE
     price: 150000
     permission: 'essentials.gamemode'
 
