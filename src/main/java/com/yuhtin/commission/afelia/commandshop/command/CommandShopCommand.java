@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 @AllArgsConstructor
-public class ShopCommand implements CommandExecutor {
+public class CommandShopCommand implements CommandExecutor {
 
     private final AfeliaCommandShop afeliaCommandShop;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
-            val shopView = afeliaCommandShop.getViewRegistry().getShopView();
+            val shopView = afeliaCommandShop.getViewRegistry().getCommandShopView();
             shopView.openInventory(((Player) sender));
         }
 

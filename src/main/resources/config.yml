@@ -1,24 +1,48 @@
-success: "&aYou spent @coins to buy this command."
-noCoins: "&cYou don't have coins to buy this command."
-permissionCommand: 'lp user @player permission set @perm'
-
-inventoryName: '&8Command shop'
-itemLore:
-  - '&8Click to buy this command'
-  - ''
-  - '&7Price: &a@price'
-
-commands:
-  command1:
-    name: '&cFly permission'
-    material: FEATHER
-    price: 1000
-    permission: 'essentials.fly'
-  command2:
-    name: '&aGamemode permission'
-    material: ENDER_EYE
-    price: 150000
-    permission: 'essentials.gamemode'
+shops:
+  command:
+    config:
+      inventoryName: '&8Command shop'
+      success: "&aYou spent @coins to buy this command."
+      nocoins: "&cYou don't have coins to buy this command."
+      executionCommand: 'lp user @player permission set @perm'
+      itemLore:
+        - '&8Click to buy this command'
+        - ''
+        - '&7Price: &a@price'
+    items:
+      command1:
+        name: '&cFly permission'
+        material: FEATHER
+        price: 1000
+        permission: 'essentials.fly'
+      command2:
+        name: '&aGamemode permission'
+        material: ENDER_EYE
+        price: 150000
+        permission: 'essentials.gamemode'
+  rank:
+    config:
+      inventoryName: '&8Rank shop'
+      success: "&aYou spent @coins to buy this rank."
+      nocoins: "&cYou don't have coins to buy this rank."
+      executionCommand: 'lp user @player parent add @rank'
+      itemLore:
+        - '&8Click to buy this rank'
+        - ''
+        - '&7Price: &a@price'
+    items:
+      rank1:
+        name: '&aVIP'
+        material: DIAMOND
+        price: 150000
+        permission: 'rank.vip'
+        rankParent: 'VIP'
+      rank2:
+        name: '&bMVP'
+        material: EMERALD
+        price: 300000
+        permission: 'rank.mvp'
+        rankParent: 'MVP'
 
 # Options of number formatters: 'DECIMAL' e 'LETTER'
 format-type: 'LETTER' # letter = 1K, 1M etc... | decimal = 1.000,00, 1.000.000,00 etc...

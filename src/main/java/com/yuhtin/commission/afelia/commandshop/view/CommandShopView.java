@@ -2,38 +2,34 @@ package com.yuhtin.commission.afelia.commandshop.view;
 
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.paged.PagedInventory;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
-import com.henryfabio.minecraft.inventoryapi.item.enums.DefaultItem;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
 import com.yuhtin.commission.afelia.commandshop.api.BuyableCommand;
+import com.yuhtin.commission.afelia.commandshop.api.ConfigurableShop;
 import com.yuhtin.commission.afelia.commandshop.cache.ShopCache;
 import com.yuhtin.commission.afelia.commandshop.hook.EconomyHook;
 import com.yuhtin.commission.afelia.commandshop.utils.NumberUtils;
 import lombok.val;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopView extends PagedInventory {
+public class CommandShopView extends PagedInventory {
 
     private final ShopCache shopCache;
     private final EconomyHook economy;
 
-    private final String permissionCommand;
-    private final String success;
-    private final String noCoinsMessage;
+    private final ConfigurableShop configurableShop;
 
-    public ShopView(ShopCache shopCache, EconomyHook economy, String permissionCommand, String success, String noCoinsMessage, String inventoryName) {
-        super("shopcommand.main", inventoryName, 6 * 9);
+    public CommandShopView(ShopCache shopCache, EconomyHook economy, ConfigurableShop configurableShop) {
+        super("shopcommand.main", configurableShop.getInventoryName(), 6 * 9);
 
         this.shopCache = shopCache;
-        this.permissionCommand = permissionCommand;
-        this.success = success;
-        this.noCoinsMessage = noCoinsMessage;
         this.economy = economy;
+
+        this.configurableShop = configurableShop;
     }
 
     @Override
@@ -45,18 +41,18 @@ public class ShopView extends PagedInventory {
             items.add(() -> InventoryItem.of(command.getItem()).defaultCallback(callback -> {
                 val player = callback.getPlayer();
                 if (!economy.has(player, command.getPrice())) {
-                    player.sendMessage(noCoinsMessage);
+                    player.sendMessage(configurableShop.getNoCoins());
                     return;
                 }
 
                 val economyResponse = economy.withdrawCoins(player, command.getPrice());
                 if (!economyResponse.transactionSuccess()) {
-                    player.sendMessage(noCoinsMessage);
+                    player.sendMessage(configurableShop.getNoCoins());
                     return;
                 }
 
-                player.sendMessage(success.replace("@coins", NumberUtils.format(command.getPrice())));
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), permissionCommand
+                player.sendMessage(configurableShop.getSuccess().replace("@coins", NumberUtils.format(command.getPrice())));
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), configurableShop.getExecutionCommand()
                         .replace("@player", player.getName())
                         .replace("@perm", command.getPermission())
                 );
