@@ -23,7 +23,7 @@ public class ConfigurableShop {
     public ConfigurableShop(FileConfiguration config, String path) {
         val section = config.getConfigurationSection("shops." + path + ".config");
 
-        executionCommand = section.getString("permissionCommand");
+        executionCommand = section.getString("executionCommand");
         success = ColorUtil.colored(section.getString("success"));
         noCoins = ColorUtil.colored(section.getString("nocoins"));
         inventoryName = ColorUtil.colored(section.getString("inventoryName"));

@@ -31,18 +31,36 @@ shops:
         - ''
         - '&7Price: &a@price'
     items:
-      rank1:
-        name: '&aVIP'
-        material: DIAMOND
+      Origins:
+        name: '&aOrigins'
+        material: TNT
         price: 150000
-        permission: 'rank.vip'
-        rankParent: 'VIP'
-      rank2:
-        name: '&bMVP'
+        permission: 'rank.origins'
+        rankParent: 'Origins'
+      VIP:
+        name: '&aVIP'
         material: EMERALD
         price: 300000
-        permission: 'rank.mvp'
-        rankParent: 'MVP'
+        permission: 'rank.vip'
+        rankParent: 'VIP'
+      Onyx:
+        name: '&aOnyx'
+        material: DIAMOND
+        price: 150000
+        permission: 'rank.onyx'
+        rankParent: 'Onyx'
+      Genesis:
+        name: '&aGenesis'
+        material: DIAMOND
+        price: 150000
+        permission: 'rank.genesis'
+        rankParent: 'Genesis'
+      Chaos:
+        name: '&aChaos'
+        material: EMERALD
+        price: 300000
+        permission: 'rank.chaos'
+        rankParent: 'Chaos'
 
 # Options of number formatters: 'DECIMAL' e 'LETTER'
 format-type: 'LETTER' # letter = 1K, 1M etc... | decimal = 1.000,00, 1.000.000,00 etc...
