@@ -40,16 +40,13 @@ public class CommandShopView extends PagedInventory {
 
             items.add(() -> InventoryItem.of(command.getItem()).defaultCallback(callback -> {
                 val player = callback.getPlayer();
-                if (!economy.has(player, command.getPrice())) {
+                val account = economy.getPlayer(player);
+                if (account.getBalance() < command.getPrice()) {
                     player.sendMessage(configurableShop.getNoCoins());
                     return;
                 }
 
-                val economyResponse = economy.withdrawCoins(player, command.getPrice());
-                if (!economyResponse.transactionSuccess()) {
-                    player.sendMessage(configurableShop.getNoCoins());
-                    return;
-                }
+                account.setBalance(account.getBalance() - command.getPrice());
 
                 player.sendMessage(configurableShop.getSuccess().replace("@coins", NumberUtils.format(command.getPrice())));
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), configurableShop.getExecutionCommand()

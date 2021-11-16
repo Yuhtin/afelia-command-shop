@@ -39,16 +39,13 @@ public class RankShopView extends PagedInventory {
 
             items.add(() -> InventoryItem.of(rank.getItem()).defaultCallback(callback -> {
                 val player = callback.getPlayer();
-                if (!economy.has(player, rank.getPrice())) {
+                val account = economy.getPlayer(player);
+                if (account.getBalance() < rank.getPrice()) {
                     player.sendMessage(configurableShop.getNoCoins());
                     return;
                 }
 
-                val economyResponse = economy.withdrawCoins(player, rank.getPrice());
-                if (!economyResponse.transactionSuccess()) {
-                    player.sendMessage(configurableShop.getNoCoins());
-                    return;
-                }
+                account.setBalance(account.getBalance() - rank.getPrice());
 
                 player.sendMessage(configurableShop.getSuccess().replace("@coins", NumberUtils.format(rank.getPrice())));
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), configurableShop.getExecutionCommand()

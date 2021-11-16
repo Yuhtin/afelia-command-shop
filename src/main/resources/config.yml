@@ -1,9 +1,9 @@
 shops:
   command:
     config:
-      inventoryName: '&8Command shop'
-      success: "&aYou spent @coins to buy this command."
-      nocoins: "&cYou don't have coins to buy this command."
+      inventoryName: '&8Command shop (Afelium)'
+      success: "&aYou spent @coins afelium to buy this command."
+      nocoins: "&cYou don't have afelium to buy this command."
       executionCommand: 'lp user @player permission set @perm'
       itemLore:
         - '&8Click to buy this command'
@@ -22,9 +22,9 @@ shops:
         permission: 'essentials.gamemode'
   rank:
     config:
-      inventoryName: '&8Rank shop'
-      success: "&aYou spent @coins to buy this rank."
-      nocoins: "&cYou don't have coins to buy this rank."
+      inventoryName: '&8Rank shop (Afelium)'
+      success: "&aYou spent @coins afelium to buy this rank."
+      nocoins: "&cYou don't have afelium to buy this rank."
       executionCommand: 'lp user @player parent add @rank'
       itemLore:
         - '&8Click to buy this rank'

@@ -1,41 +1,20 @@
 package com.yuhtin.commission.afelia.commandshop.hook;
 
-import com.yuhtin.commission.afelia.commandshop.AfeliaCommandShop;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Bukkit;
+import com.yuhtin.commission.afelia.tokensystem.AfeliaTokenSystem;
+import com.yuhtin.commission.afelia.tokensystem.api.account.Account;
+import com.yuhtin.commission.afelia.tokensystem.api.account.storage.AccountStorage;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 public final class EconomyHook {
 
-    private Economy economy;
+    private AccountStorage accountStorage;
 
     public void init() {
-        RegisteredServiceProvider<Economy> registration = Bukkit.getServicesManager().getRegistration(Economy.class);
-        if (registration == null) {
-            AfeliaCommandShop.getInstance().getLogger().severe("No economy plugin in server!");
-        } else {
-            economy = registration.getProvider();
-        }
+        accountStorage = AfeliaTokenSystem.getInstance().getAccountStorage();
     }
 
-    public double getBalance(OfflinePlayer player) {
-        return economy.getBalance(player);
-    }
-
-    public void depositCoins(OfflinePlayer player, double amount) {
-        economy.depositPlayer(player, amount);
-    }
-
-    public EconomyResponse withdrawCoins(OfflinePlayer player, double amount) {
-        if (has(player, amount)) return economy.withdrawPlayer(player, amount);
-        else return new EconomyResponse(amount, getBalance(player), EconomyResponse.ResponseType.FAILURE, "");
-    }
-
-    public boolean has(OfflinePlayer player, double amount) {
-        // avoid unimplemented economy methods
-        return economy.has(player, amount) || getBalance(player) >= amount;
+    public Account getPlayer(OfflinePlayer player) {
+        return accountStorage.findAccount(player);
     }
 
 }
