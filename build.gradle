@@ -48,6 +48,8 @@ bukkit {
 
 shadowJar {
     archiveName("${project.name}-${project.version}.jar")
+
+    relocate 'com.henryfabio.minecraft.inventoryapi', 'com.yuhtin.commission.afelia.commandshop.libs.inventoryapi'
 }
 
 compileJava {
